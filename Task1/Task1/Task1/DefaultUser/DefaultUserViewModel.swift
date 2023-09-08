@@ -46,14 +46,14 @@ final class DefaultUserViewModel: ViewModelProtocol {
         guard let user = fetchedResultsController().fetchedObjects?.first(where: {$0.id == userId!}) else { return nil }
         
         let posts = user.posts!.allObjects as? [Post]
-        let sortedPosts = sortArrayByHeightOfIds(posts!)
+        let sortedPosts = posts?.sortArrayByHeightOfIds()
         
         if !didTriggerEvent {
             didTriggerEvent = true
             eventOccured(newName: user.name!)
         }
         
-        return sortedPosts[index]
+        return sortedPosts![index]
     }
     
     func didSelectAt(at index: Int) {
@@ -68,14 +68,7 @@ final class DefaultUserViewModel: ViewModelProtocol {
         coordinator?.showUsersList(userName: showAuthorName())
     }
     
-// MARK: Sort arrray by increasing id
-    func sortArrayByHeightOfIds(_ array: [Post]) -> [Post] {
-        return array.sorted { (post1, post2) -> Bool in
-            return post1.id < post2.id // Sort in ascending order
-        }
-    }
-    
-// MARK: Check if user was changed
+    // MARK: Check if user was changed
     func checkTrigger() {
         if didTriggerEvent {
             didTriggerEvent = false

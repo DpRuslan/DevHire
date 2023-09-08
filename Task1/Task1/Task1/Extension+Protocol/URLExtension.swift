@@ -4,9 +4,9 @@
 
 import Foundation
 
-extension String {
-    static let baseURL = "https://jsonplaceholder.typicode.com"
-    static let usersEndpoint = "/users"
-    static let postsEndpoint = "/posts"
-    static let commentsEndpoint = "/comments"
+enum URLExtension: String {
+    case baseURL = "https://jsonplaceholder.typicode.com"
+    case usersEndpoint = "/users"
+    case postsEndpoint = "/posts"
+    case commentsEndpoint = "/comments"
 }

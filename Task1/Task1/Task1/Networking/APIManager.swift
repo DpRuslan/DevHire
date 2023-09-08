@@ -63,7 +63,7 @@ enum StatusCode: Int {
 }
 
 class APIManager {
-    static var shared = APIManager(baseURL: .baseURL)
+    static var shared = APIManager(baseURL: URLExtension.baseURL.rawValue)
     let baseURL: String
     
     private init(baseURL: String) {

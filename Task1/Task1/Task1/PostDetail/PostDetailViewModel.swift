@@ -24,8 +24,9 @@ final class PostDetailViewModel: ViewModelProtocol {
     
     func itemAt(at index: Int) -> Comment? {
         let comments = post.comments?.allObjects as? [Comment]
-        let sortedComments = sortArrayByHeightOfIds(comments!)
-        return sortedComments[index]
+        let sortedComments = comments?.sortArrayByHeightOfIds()
+//        let sortedComments = sortArrayByHeightOfIds(comments!)
+        return sortedComments![index]
     }
     
     func showAmountOfComments() -> String {
@@ -34,12 +35,5 @@ final class PostDetailViewModel: ViewModelProtocol {
     
     func exitVC() {
         coordinator?.exitVC()
-    }
-    
-// MARK: Sort arrray by increasing id
-    func sortArrayByHeightOfIds(_ array: [Comment]) -> [Comment] {
-        return array.sorted { (com1, com2) -> Bool in
-            return com1.id < com2.id // Sort in ascending order
-        }
     }
 }
